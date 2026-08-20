@@ -1,11 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name | Portfolio</title>
+
+  <!-- Fonts: Bricolage Grotesque for headlines, Inter for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#F5EFE4',
+            sage: '#8A9A7E',
+            burnt: '#C9633C',
+            mustard: '#E0A526',
+            pop: '#FF4FA0',
+          },
+          fontFamily: {
+            display: ['"Bricolage Grotesque"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
-<body>
-<h1>Hello, this is my portfolio!</h1>    
+
+<body class="bg-cream font-body text-neutral-900">
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
+    <h1 class="font-display font-extrabold text-6xl md:text-8xl leading-tight text-sage" id="hero-heading">
+      Hi, I'm <span class="text-burnt">Your Name</span>
+    </h1>
+    <p class="mt-6 font-body text-lg md:text-xl max-w-xl text-neutral-700" id="hero-subtext">
+      Graphic designer & video editor crafting bold, playful visuals.
+    </p>
+  </section>
+  <script>
+    gsap.from("#hero-heading", {
+      opacity: 0,
+      y: 40,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    gsap.from("#hero-subtext", {
+      opacity: 0,
+      y: 20,
+      duration: 1,
+      delay: 0.3,
+      ease: "power3.out"
+    });
+  </script>
 </body>
 </html>
