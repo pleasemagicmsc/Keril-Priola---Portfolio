@@ -58,6 +58,7 @@ body {
   width: 100%;
   height: calc(100vh - 87px);
   min-height: 700px;
+  --hero-object-position: center center;
   overflow: hidden;
   background: #111;
 }
@@ -67,7 +68,7 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center center;
+  object-position: var(--hero-object-position);
 }
 
 .hero-overlay {
@@ -81,7 +82,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: var(--hero-object-position);
   pointer-events: none;
   z-index: 2;
 }
@@ -185,10 +186,7 @@ body {
   .hero {
     height: calc(100vh - 66px);
     min-height: 650px;
-  }
-
-  .hero-image {
-    object-position: 56% center;
+    --hero-object-position: 56% center;
   }
 
   .hero-title {
@@ -227,10 +225,7 @@ body {
   .hero {
     height: calc(100svh - 54px);
     min-height: 600px;
-  }
-
-  .hero-image {
-    object-position: 58% center;
+    --hero-object-position: 58% center;
   }
 
   .hero-title {
