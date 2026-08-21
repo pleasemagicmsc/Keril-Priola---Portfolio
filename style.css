@@ -159,6 +159,31 @@ body {
   background: #1f754e;
 }
 
+.about-section {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 8vw;
+  padding: 8rem 8.6%;
+  background: #1f754e;
+}
+
+.about-section h2 {
+  align-self: start;
+  font-family: Arial Black, Arial, Helvetica, sans-serif;
+  font-size: clamp(4rem, 10vw, 10rem);
+  line-height: 0.82;
+  letter-spacing: -0.07em;
+}
+
+.about-section p {
+  max-width: 42rem;
+  font-size: clamp(1.15rem, 1.65vw, 1.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
 .placeholder-section:nth-child(even) {
   background: #174f37;
 }
@@ -195,6 +220,11 @@ body {
 
   .hero-name {
     bottom: 6%;
+  }
+
+  .about-section {
+    gap: 5vw;
+    padding: 6rem 6%;
   }
 }
 
@@ -247,5 +277,20 @@ body {
     right: 5%;
     bottom: 6%;
     font-size: clamp(2.45rem, 10.5vw, 4.2rem);
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 2.5rem;
+    padding: 5rem 6%;
+  }
+
+  .about-section h2 {
+    font-size: clamp(3.8rem, 18vw, 6.5rem);
+  }
+
+  .about-section p {
+    font-size: 1.1rem;
   }
 }
