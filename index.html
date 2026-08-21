@@ -1,390 +1,70 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keril Priola | Portfolio</title>
-
-<!-- Fonts: Akira Expanded fallback for headlines, Montserrat for body -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<!-- Tailwind (CDN — fine for now, swap to a build step before final deploy) -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          cream: '#1E1F22',
-          sage: '#5865F2',
-          sagedark: '#F2F3F5',
-          burnt: '#ED4245',
-          mustard: '#FAA61A',
-          pop: '#EB459E',
-          ink: '#F2F3F5',
-        },
-        fontFamily: {
-          display: ['"Akira Expanded"', '"Arial Black"', 'Montserrat', 'sans-serif'],
-          body: ['Montserrat', 'sans-serif'],
-        }
-      }
-    }
-  }
-</script>
-
-<style>
-  html { scroll-behavior: smooth; }
-  body { cursor: default; background: #1E1F22; }
-
-  .font-display { letter-spacing: 0.02em; }
-
-  .blob {
-    border-radius: 62% 38% 55% 45% / 45% 55% 45% 55%;
-  }
-
-  .grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.04;
-  }
-
-  .chrome-text {
-    background: linear-gradient(180deg, #ffffff 0%, #FF4FA0 45%, #ffffff 55%, #E0A526 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .work-card { transition: transform 0.4s cubic-bezier(0.2,1,0.3,1); }
-  .work-card:hover { transform: translateY(-8px); }
-  .work-card img, .work-card video { transition: transform 0.6s cubic-bezier(0.2,1,0.3,1); }
-  .work-card:hover img, .work-card:hover video { transform: scale(1.05); }
-
-  .modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
-  .modal.hidden-modal { opacity: 0; visibility: hidden; pointer-events: none; }
-  .modal-panel { transition: transform 0.4s cubic-bezier(0.2,1,0.3,1); }
-
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #1E1F22; }
-  ::-webkit-scrollbar-thumb { background: #5865F2; border-radius: 8px; }
-</style>
-
-<!-- GSAP + ScrollTrigger -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keril Priola — Portfolio</title>
+  <meta name="description" content="Keril Priola — Marketing & Multimedia Portfolio">
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-cream font-body text-ink antialiased overflow-x-hidden">
+<body>
+  <header class="navbar">
+    <a class="logo" href="#home">KP.</a>
 
-<!-- Grain overlay for texture -->
-<div class="fixed inset-0 pointer-events-none z-0 grain"></div>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#about">ABOUT ME</a>
+      <a href="#designs">DESIGNS</a>
+      <a href="#video">VIDEO</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
 
-<!-- NAV -->
-<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-5 bg-cream/80 backdrop-blur-sm border-b border-ink/10">
-  <a href="#" class="font-display font-extrabold text-xl text-sagedark">KP<span class="text-burnt">.</span></a>
-  <div class="hidden md:flex gap-8 font-body text-sm font-medium">
-    <a href="#about" class="hover:text-burnt transition-colors">About</a>
-    <a href="#design" class="hover:text-burnt transition-colors">Design</a>
-    <a href="#video" class="hover:text-burnt transition-colors">Video</a>
-    <a href="#contact" class="hover:text-burnt transition-colors">Contact</a>
-  </div>
-</nav>
+  <main>
+    <section class="hero" id="home">
+      <!-- Put your Figma hero photo at assets/hero.png -->
+      <img
+        class="hero-image"
+        src="assets/hero.png"
+        alt="Keril Priola in an urban setting"
+      >
 
-<!-- HERO -->
-<section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
-  <div class="blob absolute w-[420px] h-[420px] bg-mustard/30 top-10 -left-32 blur-2xl"></div>
-  <div class="blob absolute w-[380px] h-[380px] bg-pop/20 bottom-0 -right-24 blur-2xl"></div>
-
-  <span class="hero-anim opacity-0 font-body text-sm tracking-widest uppercase text-sagedark mb-4">Marketing | Graphic Design | Video</span>
-  <h1 class="hero-anim opacity-0 font-display font-extrabold text-6xl md:text-8xl leading-[0.95] text-sagedark">
-    What's up? I'm <span class="text-burnt"> Keril Priola, CMMS</span>
-  </h1>
-  <p class="hero-anim opacity-0 mt-6 font-body text-lg md:text-xl max-w-xl text-ink/70">
-    Certified Marketing Management Specialist and Multimedia Desginer.
-  </p>
-  <a href="#design" class="hero-anim opacity-0 mt-10 inline-block bg-sage hover:bg-sagedark text-cream font-display font-semibold px-8 py-3 rounded-full transition-colors">
-    See my work
-  </a>
-</section>
-
-<!-- MARQUEE -->
-<div class="bg-sagedark text-cream py-3 overflow-hidden whitespace-nowrap border-y-2 border-ink/10">
-  <div class="marquee inline-block font-display font-bold text-xl uppercase tracking-tight">
-    Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft • Design • Motion • Color • Craft •
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about" class="max-w-4xl mx-auto px-6 py-24 md:py-32 text-center reveal opacity-0">
-  <h2 class="font-display font-extrabold text-4xl md:text-6xl text-sagedark mb-6">A little about me</h2>
-  <p class="font-body text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
-    Detail-oriented marketing professional with hands-on experience coordinating content across multiple formats and platforms, from
-social media to podcasts to print. Skilled at building repeatable systems that keep content pipelines running without oversight, with
-growing experience using AI tools to streamline workflows and content production.
-  
-  </p>
-</section>
-
-<!-- DESIGN GRID -->
-<section id="design" class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-  <div class="flex justify-between items-end mb-12">
-    <h2 class="font-display font-extrabold text-4xl md:text-5xl text-sagedark">Design Work</h2>
-    <span class="font-body text-sm text-ink/50 hidden md:block">Click a piece to view details</span>
-  </div>
-
-  <div id="design-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    <button class="work-card group text-left" onclick="openModal('design-1')">
-      <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-mustard/20 flex items-center justify-center">
-        <span class="font-display text-ink/30 text-sm">Replace with image</span>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Project Title</h3>
-      <p class="font-body text-sm text-ink/60">Branding / Poster / etc.</p>
-    </button>
-
-    <button class="work-card group text-left" onclick="openModal('design-2')">
-      <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-burnt/20 flex items-center justify-center">
-        <span class="font-display text-ink/30 text-sm">Replace with image</span>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Project Title</h3>
-      <p class="font-body text-sm text-ink/60">Branding / Poster / etc.</p>
-    </button>
-
-    <button class="work-card group text-left" onclick="openModal('design-3')">
-      <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-pop/20 flex items-center justify-center">
-        <span class="font-display text-ink/30 text-sm">Replace with image</span>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Project Title</h3>
-      <p class="font-body text-sm text-ink/60">Branding / Poster / etc.</p>
-    </button>
-
-    <button class="work-card group text-left" onclick="openModal('design-4')">
-      <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-sage/20 flex items-center justify-center">
-        <span class="font-display text-ink/30 text-sm">Replace with image</span>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Project Title</h3>
-      <p class="font-body text-sm text-ink/60">Branding / Poster / etc.</p>
-    </button>
-
-    <button class="work-card group text-left" onclick="openModal('design-5')">
-      <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-mustard/20 flex items-center justify-center">
-        <span class="font-display text-ink/30 text-sm">Replace with image</span>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Project Title</h3>
-      <p class="font-body text-sm text-ink/60">Branding / Poster / etc.</p>
-    </button>
-
-    <button class="work-card group text-left" onclick="openModal('design-6')">
-      <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-sage/20 flex items-center justify-center">
-        <span class="font-display text-ink/30 text-sm">Replace with image</span>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Project Title</h3>
-      <p class="font-body text-sm text-ink/60">Branding / Poster / etc.</p>
-    </button>
-  </div>
-
-  <div id="design-extra" class="hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8"></div>
-  <div class="flex flex-col items-center gap-4 mt-12">
-    <button type="button" onclick="toggleCollection('design-extra', this)" aria-expanded="false" class="font-display font-semibold text-sagedark border-2 border-sagedark rounded-full px-7 py-3 hover:bg-sagedark hover:text-cream transition-colors">
-      View More Design Work
-    </button>
-    <label class="cursor-pointer font-body text-sm text-ink/60 hover:text-burnt transition-colors">
-      <span>Upload more design work</span>
-      <input type="file" accept="image/*" multiple class="sr-only" onchange="handleUploads(event, 'design-extra', 'design')">
-    </label>
-  </div>
-</section>
-
-<!-- VIDEO REEL -->
-<section id="video" class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-  <h2 class="font-display font-extrabold text-4xl md:text-5xl text-sagedark mb-12">Video Reel</h2>
-
-  <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <button class="work-card group text-left" onclick="openModal('video-1')">
-      <div class="aspect-video rounded-2xl overflow-hidden bg-sage/30 flex items-center justify-center relative">
-        <span class="font-display text-ink/40 text-sm">Replace with video thumbnail</span>
-        <div class="absolute inset-0 flex items-center justify-center bg-ink/0 group-hover:bg-ink/10 transition-colors">
-          <div class="w-14 h-14 rounded-full bg-cream/90 flex items-center justify-center">▶</div>
+      <div class="hero-overlay">
+        <div class="hero-title">
+          <h1>PORT<br>FOLIO<br><span>2026</span></h1>
+          <p>MARKETING &amp; MULTIMEDIA</p>
         </div>
+
+        <img
+          class="hero-layer2"
+          src="assets/herolayer2.png"
+          alt=""
+          aria-hidden="true"
+        >
+
+        <h2 class="hero-name">KERIL<br>PRIOLA</h2>
       </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Video Title</h3>
-      <p class="font-body text-sm text-ink/60">Edit / Motion Graphics / etc.</p>
-    </button>
+    </section>
 
-    <button class="work-card group text-left" onclick="openModal('video-2')">
-      <div class="aspect-video rounded-2xl overflow-hidden bg-mustard/30 flex items-center justify-center relative">
-        <span class="font-display text-ink/40 text-sm">Replace with video thumbnail</span>
-        <div class="absolute inset-0 flex items-center justify-center bg-ink/0 group-hover:bg-ink/10 transition-colors">
-          <div class="w-14 h-14 rounded-full bg-cream/90 flex items-center justify-center">▶</div>
-        </div>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Video Title</h3>
-      <p class="font-body text-sm text-ink/60">Edit / Motion Graphics / etc.</p>
-    </button>
+    <!-- Temporary sections so the navigation already works.
+         We'll replace these with your actual Figma designs later. -->
+    <section class="placeholder-section" id="about">
+      <h2>ABOUT ME</h2>
+    </section>
 
-    <button class="work-card group text-left" onclick="openModal('video-3')">
-      <div class="aspect-video rounded-2xl overflow-hidden bg-burnt/20 flex items-center justify-center relative">
-        <span class="font-display text-ink/40 text-sm">Replace with video thumbnail</span>
-        <div class="absolute inset-0 flex items-center justify-center bg-ink/0 group-hover:bg-ink/10 transition-colors">
-          <div class="w-14 h-14 rounded-full bg-cream/90 flex items-center justify-center">▶</div>
-        </div>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Video Title</h3>
-      <p class="font-body text-sm text-ink/60">Edit / Motion Graphics / etc.</p>
-    </button>
+    <section class="placeholder-section" id="designs">
+      <h2>DESIGNS</h2>
+    </section>
 
-    <button class="work-card group text-left" onclick="openModal('video-4')">
-      <div class="aspect-video rounded-2xl overflow-hidden bg-pop/20 flex items-center justify-center relative">
-        <span class="font-display text-ink/40 text-sm">Replace with video thumbnail</span>
-        <div class="absolute inset-0 flex items-center justify-center bg-ink/0 group-hover:bg-ink/10 transition-colors">
-          <div class="w-14 h-14 rounded-full bg-cream/90 flex items-center justify-center">▶</div>
-        </div>
-      </div>
-      <h3 class="font-display font-semibold text-lg mt-4 text-ink">Video Title</h3>
-      <p class="font-body text-sm text-ink/60">Edit / Motion Graphics / etc.</p>
-    </button>
-  </div>
+    <section class="placeholder-section" id="video">
+      <h2>VIDEO</h2>
+    </section>
 
-  <div id="video-extra" class="hidden grid-cols-1 md:grid-cols-2 gap-8 mt-8"></div>
-  <div class="flex flex-col items-center gap-4 mt-12">
-    <button type="button" onclick="toggleCollection('video-extra', this)" aria-expanded="false" class="font-display font-semibold text-sagedark border-2 border-sagedark rounded-full px-7 py-3 hover:bg-sagedark hover:text-cream transition-colors">
-      View More Video Work
-    </button>
-    <label class="cursor-pointer font-body text-sm text-ink/60 hover:text-burnt transition-colors">
-      <span>Upload more video work</span>
-      <input type="file" accept="video/*,image/*" multiple class="sr-only" onchange="handleUploads(event, 'video-extra', 'video')">
-    </label>
-  </div>
-</section>
+    <section class="placeholder-section" id="contact">
+      <h2>CONTACT</h2>
+    </section>
+  </main>
 
-<!-- CONTACT -->
-<section id="contact" class="max-w-4xl mx-auto px-6 py-24 md:py-32 text-center">
-  <h2 class="font-display font-extrabold text-4xl md:text-6xl text-sagedark mb-6">Let's work together</h2>
-  <p class="font-body text-lg text-ink/70 mb-8">Open to freelance, collabs, and full-time roles.</p>
-  <a href="mailto:[email protected]" class="inline-block bg-burnt hover:bg-burnt/80 text-cream font-display font-semibold px-8 py-3 rounded-full transition-colors">
-    [email protected]
-  </a>
-  <div class="flex justify-center gap-6 mt-8 font-body text-sm text-ink/60">
-    <a href="#" class="hover:text-burnt transition-colors">Instagram</a>
-    <a href="#" class="hover:text-burnt transition-colors">Behance</a>
-    <a href="#" class="hover:text-burnt transition-colors">LinkedIn</a>
-  </div>
-</section>
-
-<footer class="text-center py-8 font-body text-xs text-ink/40">
-  © 2026 Keril Priola. Built with care.
-</footer>
-
-<!-- MODAL (shared, content swapped by openModal) -->
-<div id="modal" class="modal hidden-modal fixed inset-0 z-[60] flex items-center justify-center bg-ink/60 p-6">
-  <div class="modal-panel bg-cream rounded-3xl max-w-2xl w-full p-8 relative">
-    <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-ink/10 hover:bg-ink/20 flex items-center justify-center">✕</button>
-    <h3 id="modal-title" class="font-display font-extrabold text-3xl text-sagedark mb-3">Project Title</h3>
-    <p id="modal-body" class="font-body text-ink/70 leading-relaxed">
-      Replace this with your case study text — the brief, your approach, and the outcome.
-    </p>
-  </div>
-</div>
-
-<script>
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Hero entrance
-  gsap.to(".hero-anim", {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    stagger: 0.15,
-    ease: "power3.out"
-  });
-  gsap.set(".hero-anim", { y: 30 });
-  gsap.to(".hero-anim", { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" });
-
-  // Marquee scroll
-  gsap.to(".marquee", {
-    xPercent: -50,
-    repeat: -1,
-    duration: 18,
-    ease: "linear"
-  });
-
-  // About section reveal
-  gsap.to(".reveal", {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    scrollTrigger: { trigger: ".reveal", start: "top 80%" }
-  });
-  gsap.set(".reveal", { y: 30 });
-
-  // Work card entrance on scroll
-  gsap.utils.toArray(".work-card").forEach((card) => {
-    gsap.from(card, {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: { trigger: card, start: "top 90%" }
-    });
-  });
-
-  // Modal logic
-  const projectData = {
-    "design-1": { title: "Project Title", body: "Replace with your case study text." },
-    "design-2": { title: "Project Title", body: "Replace with your case study text." },
-    "design-3": { title: "Project Title", body: "Replace with your case study text." },
-    "design-4": { title: "Project Title", body: "Replace with your case study text." },
-    "design-5": { title: "Project Title", body: "Replace with your case study text." },
-    "design-6": { title: "Project Title", body: "Replace with your case study text." },
-    "video-1": { title: "Video Title", body: "Replace with your case study text." },
-    "video-2": { title: "Video Title", body: "Replace with your case study text." },
-    "video-3": { title: "Video Title", body: "Replace with your case study text." },
-    "video-4": { title: "Video Title", body: "Replace with your case study text." },
-  };
-
-  function toggleCollection(id, button) {
-    const collection = document.getElementById(id);
-    const isHidden = collection.classList.toggle("hidden");
-    collection.classList.toggle("grid", !isHidden);
-    button.setAttribute("aria-expanded", String(!isHidden));
-    button.textContent = isHidden ? button.textContent.replace("Hide More", "View More") : button.textContent.replace("View More", "Hide More");
-  }
-
-  function handleUploads(event, collectionId, type) {
-    const collection = document.getElementById(collectionId);
-    Array.from(event.target.files).forEach((file, index) => {
-      const mediaUrl = URL.createObjectURL(file);
-      const card = document.createElement("article");
-      card.className = "work-card group text-left";
-      const isVideo = type === "video" && file.type.startsWith("video/");
-      const media = isVideo
-        ? `<video src="${mediaUrl}" class="w-full h-full object-cover" muted loop playsinline></video>`
-        : `<img src="${mediaUrl}" alt="${file.name}" class="w-full h-full object-cover">`;
-      card.innerHTML = `<div class="${isVideo ? "aspect-video" : "aspect-[4/5]"} rounded-2xl overflow-hidden bg-sage/20">${media}</div><h3 class="font-display font-semibold text-lg mt-4 text-ink">${file.name}</h3><p class="font-body text-sm text-ink/60">Uploaded ${type} work</p>`;
-      collection.appendChild(card);
-      if (isVideo) card.querySelector("video").play().catch(() => {});
-      gsap.from(card, { opacity: 0, y: 24, duration: 0.6, delay: index * 0.08, ease: "power2.out" });
-    });
-    if (collection.classList.contains("hidden")) {
-      const button = collection.nextElementSibling.querySelector("button");
-      toggleCollection(collectionId, button);
-    }
-    event.target.value = "";
-  }
-
-  function openModal(id) {
-    const data = projectData[id];
-    document.getElementById("modal-title").textContent = data.title;
-    document.getElementById("modal-body").textContent = data.body;
-    const modal = document.getElementById("modal");
-    modal.classList.remove("hidden-modal");
-    gsap.fromTo(".modal-panel", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" });
-  }
-
-  function closeModal() {
-    document.getElementById("modal").classList.add("hidden-modal");
-  }
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
