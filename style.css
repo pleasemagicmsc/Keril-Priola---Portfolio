@@ -225,7 +225,7 @@ body {
   .hero {
     height: calc(100svh - 54px);
     min-height: 600px;
-    --hero-object-position: 58% center;
+    --hero-object-position: center center;
   }
 
   .hero-title {
