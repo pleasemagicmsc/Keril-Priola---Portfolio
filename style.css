@@ -234,18 +234,18 @@ body {
   }
 
   .hero-title h1 {
-    font-size: clamp(4.4rem, 19vw, 7rem);
+    font-size: clamp(3.08rem, 13.3vw, 4.9rem);
     line-height: 0.84;
   }
 
   .hero-title p {
-    font-size: 0.85rem;
+    font-size: 0.595rem;
     margin-top: 0.55rem;
   }
 
   .hero-name {
     right: 5%;
     bottom: 6%;
-    font-size: clamp(3.5rem, 15vw, 6rem);
+    font-size: clamp(2.45rem, 10.5vw, 4.2rem);
   }
 }
